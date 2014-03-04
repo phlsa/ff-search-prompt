@@ -55,7 +55,7 @@
 <input id="ab1" type="text" placeholder="Search or enter address">
 <div id="dd1" class="dropdown">
   <div class="list-entry active" id="entry-search">
-    <img src="google-g-logo.png">
+    <img src="google-g-logo.png" id="image">
     <span id="search-descr">Search for</span> <strong id="search-term"></strong><br>
   </div>
 </div>
@@ -66,6 +66,7 @@
   var dd1 = document.getElementById('dd1');
   var searchTerm = document.getElementById('search-term');
   var searchDescr = document.getElementById('search-descr');
+  var image = document.getElementById('image');
   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
   ab1.addEventListener('input', function() {
@@ -73,8 +74,10 @@
     var regex = new RegExp(expression);
     if (v.match(regex)) {
       searchDescr.innerHTML = "Go to";
+      image.style.opacity = 0;
     } else {
       searchDescr.innerHTML = "Search Google for";
+      image.style.opacity = 1;
     }
     searchTerm.innerHTML = v;
 
