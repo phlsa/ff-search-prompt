@@ -37,7 +37,7 @@
     top: 3px;
     margin-top: -3px;
   }
-  p {
+  p, ul {
     max-width: 500px;
     line-height: 1.2em;
   }
@@ -96,6 +96,21 @@
   </div>
 </div>
 
+<h3>Things to notice:</h3>
+<ul>
+  <li>
+    The list entry that prompts to search uses a different layout (one line). That helps to set it apart from the rest of the list.
+  </li>
+  <li>
+    That entry is automatically selected once you start typing into the URL bar.
+  </li>
+  <li>
+    Once the text in the URL bar has URL formatting, the autoselected entry changes as well.
+  </li>
+  <li>
+    We definitely need better heuristics for when a string is a URL and when its a search term. »localhost« for example should be treated as a URL while »node.js« ideally shouldn't.
+  </li>
+</ul>
 
 <script type="text/javascript">
   var ab1 = document.getElementById('ab1');
