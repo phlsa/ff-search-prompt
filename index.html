@@ -19,7 +19,7 @@
     padding: 4px 0;
   }
   .list-entry {
-    padding: 4px;
+    padding: 10px 4px;
     font-size: 13px;
   }
   .active {
@@ -27,9 +27,6 @@
     color: #fff;
   }
   .list-entry span {
-    font-weight: normal;
-    font-size: 11px;
-    margin-left: 20px;
     display: inline-block;
   }
   .list-entry img {
@@ -42,6 +39,13 @@
   p {
     max-width: 500px;
     line-height: 1.2em;
+  }
+  span.emphasis {
+    font-weight: bold !important;
+  }
+  #search-descr {
+    opacity: 0.7;
+    font-size: 11px;
   }
   </style>
 </head>
@@ -56,8 +60,7 @@
 <div id="dd1" class="dropdown">
   <div class="list-entry active" id="entry-search">
     <img src="google-g-logo.png" id="image">
-    <strong id="search-term"></strong><br>
-    <span id="search-descr"></span>
+    <span id="search-term" class="emphasis"></span> <span id="search-descr"></span>
   </div>
 </div>
 
@@ -73,12 +76,14 @@
   ab1.addEventListener('input', function() {
     var v = ab1.value;
     var regex = new RegExp(expression);
-    if (v.match(regex)) {
-      searchDescr.innerHTML = "visit web page";
+    if (v.match(regex) && v.indexOf(' ') === -1) {
+      searchDescr.innerHTML = "— Visit page";
       image.style.opacity = 0;
+      searchTerm.className = '';
     } else {
-      searchDescr.innerHTML = "Search Google";
+      searchDescr.innerHTML = "— Google Search";
       image.style.opacity = 1;
+      searchTerm.className = 'emphasis';
     }
     searchTerm.innerHTML = v;
 
