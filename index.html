@@ -23,9 +23,11 @@
     font-size: 13px;
   }
   .active {
-    padding: 12px 4px;
     background-color: #366ff1;
     color: #fff;
+  }
+  .list-entry.one-line {
+    padding: 12px 4px;
   }
   .list-entry span {
     display: inline-block;
@@ -44,7 +46,7 @@
   span.emphasis {
     font-weight: bold !important;
   }
-  #search-descr {
+  .item-descr {
     opacity: 0.7;
     font-size: 11px;
   }
@@ -65,9 +67,13 @@
 
 <input id="ab1" type="text" placeholder="Search or enter address">
 <div id="dd1" class="dropdown">
-  <div class="list-entry active" id="entry-search">
+  <div class="list-entry active one-line" id="entry-url">
+    <img src="google-g-logo.png" style="opacity:0">
+    <span id="url-term"></span> <span class="item-descr">— visit page</span>
+  </div>
+  <div class="list-entry active one-line" id="entry-search">
     <img src="google-g-logo.png" id="image">
-    <span id="search-term" class="emphasis"></span> <span id="search-descr"></span>
+    <span id="search-term" class="emphasis"></span> <span id="search-descr" class="item-descr">— Google Search</span>
   </div>
   <div class="list-entry">
     <img src="">
@@ -116,7 +122,9 @@
   var ab1 = document.getElementById('ab1');
   var dd1 = document.getElementById('dd1');
   var searchTerm = document.getElementById('search-term');
-  var searchDescr = document.getElementById('search-descr');
+  var urlTerm = document.getElementById('url-term');
+  var entrySearch = document.getElementById('entry-search');
+  var entryURL = document.getElementById('entry-url');
   var image = document.getElementById('image');
   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
@@ -124,13 +132,15 @@
     var v = ab1.value;
     var regex = new RegExp(expression);
     if (v.match(regex) && v.indexOf(' ') === -1) {
-      searchDescr.innerHTML = "— Visit page";
-      image.style.opacity = 0;
-      searchTerm.className = '';
+      // this is a URL
+      urlTerm.innerHTML = v;
+      entryURL.style.display = 'block';
+      entrySearch.classList.remove('active');
     } else {
-      searchDescr.innerHTML = "— Google Search";
+      // this is a search term
       image.style.opacity = 1;
-      searchTerm.className = 'emphasis';
+      entryURL.style.display = 'none';
+      entrySearch.classList.add('active');
     }
     searchTerm.innerHTML = v;
 
